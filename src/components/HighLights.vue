@@ -1,9 +1,21 @@
 <script setup>
+import {computed} from "vue"
+import {getPressureMm, getTime} from "../utils"
 
-</script>
+const props = defineProps({
+    weatherInfo: {
+        type: [Object, null],
+        required: true, 
+    }
+})
+const timezone = computed(()=> props.weatherInfo?.timezone);
+const sunriseTime = computed(()=> {
+  return getTime(props.weatherInfo?.sys?.sunrise + timezone.value);
+});
+ </script>
 
 <template>
-<div class="section highlights">
+<div v-if = "weatherInfo?.weather" class="section highlights">
 <div class="title">
 Today's Highlights
 </div>
@@ -18,7 +30,7 @@ Today's Highlights
         <div class="card-justify">
         <div class="info-main">
             <div class="info-main-num">
-            3.6
+            {{weatherInfo?.wind?.speed}}
             </div>
             <div class="info-main-text">
             m/s
@@ -26,7 +38,7 @@ Today's Highlights
         </div> 
         <div class="info-main">
             <div class="info-main-num">
-            350
+              {{weatherInfo?.wind?.deg}}
             </div>
             <div class="info-main-text">
             deg
@@ -40,9 +52,9 @@ Today's Highlights
         Wind gusts
     </div>
     <div class="card-small-info">
-        <div class="card-small-data">
+        <div v-if="weatherInfo?.wind?.gust" class="card-small-data">
         <div class="info-main-num">
-            8.4
+          {{Math.round(weatherInfo?.wind?.gust)}}
         </div>
         <div class="info-main-text">
             m/s
@@ -69,7 +81,7 @@ Today's Highlights
         <div class="card-centered">
         <div class="info-main">
             <div class="info-main-num">
-            765
+            {{getPressureMm(weatherInfo?.main?.pressure)}}
             </div>
             <div class="info-main-text">
             mm
@@ -85,7 +97,7 @@ Today's Highlights
     <div class="card-small-info">
         <div class="card-small-data">
         <div class="info-main-num">
-            21
+            {{Math.round(weatherInfo?.main?.feels_like)}}
         </div>
         <div class="info-main-text">
             °C
@@ -114,7 +126,7 @@ Today's Highlights
             Sunrise
             </div>
             <div class="state-time">
-            07:31:42
+              {{sunriseTime}}
             </div>
         </div>
         <div class="state">
@@ -136,7 +148,7 @@ Today's Highlights
     <div class="card-small-info">
         <div class="card-small-data">
         <div class="info-main-num">
-            80
+          {{weatherInfo?.clouds?.all}}
         </div>
         <div class="info-main-text">
             %
