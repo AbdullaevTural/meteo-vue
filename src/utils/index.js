@@ -1,30 +1,13 @@
-function findLargestPerfectSquare(arr) {
-  let largestPerfectSquare = -1;
-  
-  for (let i = 0; i < arr.length; i++) {
-    if (Number.isInteger(Math.sqrt(arr[i]))) {
-      if (arr[i] > largestPerfectSquare) {
-        largestPerfectSquare = arr[i];
-      }
-    }
-  }
-  
-  return largestPerfectSquare;
+const PRESSURE_UNITS = 0.750062
+export const capitalizeFirstLetter = (str) => {
+  if (!str) return "";
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+export const getPressureMm = (hpa) =>{
+  return Math.round(hpa * PRESSURE_UNITS)
 }
 
-// Пример использования:
-function isBitwiseOROddOrEven(arr) {
-  let result = arr[0];
-  
-  for (let i = 1; i < arr.length; i++) {
-  result = result | arr[i];
-  console.log(result);
-  }
-  
-  return result % 2 === 0 ? "even" : "odd";
-  }
-
-const array = [2,10,12];
-const largestPerfectSquare = findLargestPerfectSquare(array);
-console.log(isBitwiseOROddOrEven(array));
-console.log(largestPerfectSquare); // Вывод: 36
+export const getTime = (seconds) => {
+  return new Date (seconds * 1000).toLocaleTimeString('ru-RU', {timeZone: 'Atlantic/Reykjavik'})
+}

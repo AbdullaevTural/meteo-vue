@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "sass": "^1.69.5",
-    "vue": "^3.3.11"
+    "vue": "^3.4.15"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
-    "vite": "^5.0.10"
+    "vite": "^5.0.12"
   }
 }

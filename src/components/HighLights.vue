@@ -12,10 +12,13 @@ const timezone = computed(()=> props.weatherInfo?.timezone);
 const sunriseTime = computed(()=> {
   return getTime(props.weatherInfo?.sys?.sunrise + timezone.value);
 });
+const sunsetTime = computed(()=> {
+  return getTime(props.weatherInfo?.sys?.sunset + timezone.value);
+});
  </script>
 
 <template>
-<div v-if = "weatherInfo?.weather" class="section highlights">
+<div class="section highlights">
 <div class="title">
 Today's Highlights
 </div>
@@ -135,7 +138,7 @@ Today's Highlights
             Sunset
             </div>
             <div class="state-time">
-            18:34:19
+              {{sunsetTime}}
             </div>
         </div>
         </div>
